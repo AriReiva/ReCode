@@ -20,10 +20,8 @@ class SignUpActivity : AppCompatActivity() {
 
         val buttonRegisa = findViewById<Button>(R.id.buttonRegisa)
 
-        // Initialize DBHelper
         dbHelper = DBHelper(this)
-
-        // Set up sign-up button click listener
+        
         buttonRegisa.setOnClickListener {
             val nisn = findViewById<EditText>(R.id.et_NISN).text.toString().trim()
             val nama = findViewById<EditText>(R.id.et_Nama).text.toString().trim()
@@ -32,26 +30,21 @@ class SignUpActivity : AppCompatActivity() {
             val jenkel = findViewById<EditText>(R.id.et_Jenkel).text.toString().trim()
             val password = findViewById<EditText>(R.id.et_Pass).text.toString().trim()
 
-            // Validate inputs
             if (nisn.isEmpty() || nama.isEmpty() || kelas.isEmpty() || jurusan.isEmpty() || jenkel.isEmpty() || password.isEmpty()) {
-                // Show error if any field is empty
                 Toast.makeText(this, "Please fill all fields", Toast.LENGTH_SHORT).show()
             } else {
-                // Create new Siswa object
                 val siswa = Siswa(nama = nama, nisn = nisn, kelas = kelas, jurusan = jurusan, gender = jenkel, password = password)
-
-                // Insert new user data into database
+                
                 val result = dbHelper.insertSiswa(siswa)
 
-                // Check if insert was successful
                 if (result != -1L) {
-                    // Show success message
+                    
                     Toast.makeText(this, "Sign-Up Successful!", Toast.LENGTH_SHORT).show()
 
                      startActivity(Intent(this, MainActivity::class.java))
                      finish()
                 } else {
-                    // Show error if insertion failed
+
                     Toast.makeText(this, "Sign-Up Failed. Try Again!", Toast.LENGTH_SHORT).show()
                 }
             }
