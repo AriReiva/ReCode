@@ -36,16 +36,12 @@ class FragmentProfile : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        // Menginflate layout untuk fragment
         val view = inflater.inflate(R.layout.fragment_profile, container, false)
 
-        // Ambil data siswa dari database
         val siswaData = getSiswaDataFromDatabase() // Fungsi untuk mengambil data siswa
 
         val androidId = getAndroidId()
 
-        // Jika siswa ditemukan, tampilkan datanya
         if (siswaData != null) {
             val tvNama: TextView = view.findViewById(R.id.tvNama)
             val tvNISN: TextView = view.findViewById(R.id.tvNISN)
@@ -68,12 +64,11 @@ class FragmentProfile : Fragment() {
     private fun getAndroidId(): String {
         return Settings.Secure.getString(requireContext().contentResolver, Settings.Secure.ANDROID_ID)
     }
-    // Method untuk mengambil data siswa dari database
+
     private fun getSiswaDataFromDatabase(): Siswa? {
         val dbHelper = DBHelper(requireContext())
         val siswaList = dbHelper.getAllSiswa()
-
-        // Misalnya, ambil siswa pertama dalam daftar (sesuaikan dengan logika Anda)
+        
         return if (siswaList.isNotEmpty()) siswaList[0] else null
     }
 
