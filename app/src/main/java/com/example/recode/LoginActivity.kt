@@ -31,7 +31,6 @@ class LoginActivity : AppCompatActivity() {
                 val user = dbHelper.loginSiswa(nisn, nama, password)
                 if (user != null) {
                     Toast.makeText(this, "Login berhasil! Selamat datang, ${user.nama}", Toast.LENGTH_SHORT).show()
-                    // Arahkan ke halaman berikutnya
                     startActivity(Intent(this, ButtomNavigationActivity::class.java))
                 } else {
                     Toast.makeText(this, "Login gagal! Periksa kembali data Anda.", Toast.LENGTH_SHORT).show()
